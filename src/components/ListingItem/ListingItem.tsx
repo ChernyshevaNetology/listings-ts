@@ -1,21 +1,13 @@
 import React, { FC } from 'react';
+import {
+  TITLE_LENGTH,
+  MEDIUM_QUANTITY,
+  LOW_QUANTITY,
+  currencyOptions,
+} from './ListingItemConstants';
+import { ListingItemPropTypes } from './ListingItemTypes';
 
-const TITLE_LENGTH: number = 50;
-const LOW_QUANTITY: number = 50;
-const MEDIUM_QUANTITY: number = 50;
-
-interface Props {
-  id: number;
-  state: string;
-  url: string;
-  img: string;
-  title: string;
-  currency: string;
-  price: string;
-  quantity: number;
-}
-
-const ListingItem: FC<Props> = ({
+const ListingItem: FC<ListingItemPropTypes> = ({
   state,
   id,
   url,
@@ -31,17 +23,6 @@ const ListingItem: FC<Props> = ({
 
   const handleTitle = (name: string): string =>
     name.length > TITLE_LENGTH ? `${name.slice(0, TITLE_LENGTH)}...` : title;
-
-  const handleCurrency = (currencyCode: string): string => {
-    switch (currencyCode) {
-      case 'USD':
-        return '$';
-      case 'EUR':
-        return '€';
-      default:
-        return 'GBR ';
-    }
-  };
 
   const handleQuantity = (level: number): string => {
     if (level < LOW_QUANTITY) {
@@ -63,7 +44,7 @@ const ListingItem: FC<Props> = ({
       <div className="item-details">
         <p className="item-title">{handleTitle(title)}</p>
         <p className="item-price">
-          {handleCurrency(currency)}
+          {currencyOptions[currency] || 'GBP'}
           {price}
         </p>
         <p className={`item-quantity level-${handleQuantity(quantity)}`}>
@@ -74,4 +55,4 @@ const ListingItem: FC<Props> = ({
   );
 };
 
-export default ListingItem;
+export { ListingItem };

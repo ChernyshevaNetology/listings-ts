@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import ListingItem from '../ListingItem';
+import { ListingItem } from '../ListingItem';
 import { Product } from 'types';
 
 interface Props {
